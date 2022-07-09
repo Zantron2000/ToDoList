@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>TaskList</title>
+    </head>
+    <body>
+        <h1>TaskList</h1>
+
+        <form action="/create" method="post">
+            {% csrf_token %}
+
+            {% for field in form %}
+        
+            {{ field.label }}
+            {{ field }}
+
+            {% endfor %}
+            
+            
+
+            <input type="submit"></input>
+        </form>
+        
+        <hr>
+        {% for task in tasklist %}
+        
+        {{ task }}
+
+        <form action="{% url 'delete' task.id %}" method="post">
+            {% csrf_token %}
+            <input type="submit">
+        </form>
+        <hr>
+        {% endfor %}
+
+    </body>
+</html>
