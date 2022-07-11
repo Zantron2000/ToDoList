@@ -1,6 +1,6 @@
 from django.shortcuts import redirect, render
 from django.http import HttpRequest
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required, permission_required
 
 from core.forms import NewUserForm, LoginForm, TaskForm
@@ -51,7 +51,7 @@ def get_tasks(request: HttpRequest):
     
     return render(request, "core/tasks.html", {"tasklist": tasklisk, "form": form})
 
-@login_required
+@login_required(login_url="login")
 def create_task(request: HttpRequest):
     
     context = {"task":request.POST["task"], "tasklist":models.TaskList.objects.get(user=request.user)}
@@ -60,6 +60,7 @@ def create_task(request: HttpRequest):
 
     return redirect("tasks")
 
+@login_required(login_url="login")
 def delete_task(request: HttpRequest, pk: int):
     task:models.Task = models.Task.objects.get(id=pk)
 
@@ -67,3 +68,9 @@ def delete_task(request: HttpRequest, pk: int):
         task.delete()
 
     return redirect("tasks")
+
+@login_required(login_url="login")
+def logout_user(request: HttpRequest):
+    logout(request)
+
+    return redirect("login")

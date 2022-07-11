@@ -7,4 +7,5 @@ urlpatterns = [
     path("tasklist", views.get_tasks, name="tasks"),
     path("create", views.create_task, name="create"),
     path("delete/<int:pk>", views.delete_task, name="delete"),
+    path("logout", views.logout_user, name="logout")
 ]

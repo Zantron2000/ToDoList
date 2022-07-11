@@ -6,6 +6,12 @@
     </head>
     <body>
         <h1>TaskList</h1>
+        <form action="/logout" method="post">
+            {% csrf_token %}
+            <input type="submit" value="Log Out">
+        </form>
+
+        <hr>
 
         <form action="/create" method="post">
             {% csrf_token %}
@@ -27,9 +33,9 @@
         
         {{ task }}
 
-        <form action="{% url 'delete' task.id %}" method="post">
+        <form style="display:inline" action="{% url 'delete' task.id %}" method="post">
             {% csrf_token %}
-            <input type="submit">
+            <input type="submit" value="delete">
         </form>
         <hr>
         {% endfor %}

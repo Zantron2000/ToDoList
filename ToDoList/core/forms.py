@@ -9,6 +9,11 @@ class NewUserForm(UserCreationForm):
         model = User
         fields = ["username", "email", "password1", "password2"]
 
+    def __init__(self, *args, **kwargs):
+        super(NewUserForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'color'
+
 class LoginForm(forms.Form):
     username = forms.CharField()
     password = forms.CharField(widget=forms.PasswordInput)

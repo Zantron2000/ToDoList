@@ -1,0 +1,51 @@
+body {
+    background-color: rgb(116, 184, 205)
+}
+
+.box {
+    background-color: rgb(100, 177, 183);
+    box-shadow: -2px -2px 5px black;
+    padding: 50px;
+    width: 600px;
+    height: 500px;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
+
+.color {
+    margin-bottom: 10px;
+    width: 200px;
+    height: 25px;
+}
+
+.description {
+    margin-bottom: 5px;
+    margin-top: 10px;
+}
+
+.item {
+    display: block;
+    margin: auto;
+    width: 150px;
+}
+
+.title {
+    text-align: center;
+}
+
+.submit {
+    
+    width: 210px;
+    padding: 4px;
+    height: 35px;
+    margin-top: 35px;
+    background-color: green;
+}
+
+.flex {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+}
