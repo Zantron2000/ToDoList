@@ -94,12 +94,10 @@ def verify_user(request: HttpRequest):
     if(valid == None):
         valid = models.UserValidation(user=request.user)
         valid.save()
-    elif(valid.expired()):
+    elif(valid.expired(30)):
         valid.generate_new_code()
         
     if(request.method == "POST"):
-        print(request.POST["code"])
-        print(valid.code)
         if(request.POST["code"] == valid.code):
             group:Group = Group.objects.get(name="Verified")
             group.user_set.add(request.user)
@@ -118,5 +116,15 @@ def verify_user(request: HttpRequest):
 
 @login_required(login_url="login")
 @utils.group_unrequired(group_name="Verified", redirect_url="tasks")
+def resend_verification(request: HttpRequest):
+    print("hello")
+    if(request.method == "POST"):
+        validation: models.UserValidation = utils.get_validation(request.user)
+        if(validation is not None and validation.expired(1)):
+            validation.generate_new_code()
+            utils.send_email(request, validation)
+
+    return redirect("verify")
+
 def test(request: HttpRequest):
     return HttpResponse("Done")

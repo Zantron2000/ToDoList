@@ -27,8 +27,8 @@ class UserValidation(models.Model):
     code = models.CharField(max_length=6, default=generate_code)
     sent = models.BooleanField(default=False)
 
-    def expired(self):
-        time = self.date + datetime.timedelta(minutes=30)
+    def expired(self, minutes):
+        time = self.date + datetime.timedelta(minutes=minutes)
 
         if(time < datetime.datetime.now(datetime.timezone.utc)):
             return True
