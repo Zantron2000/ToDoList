@@ -13,6 +13,7 @@ class NewUserForm(UserCreationForm):
         super(NewUserForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
             visible.field.widget.attrs['class'] = 'input'
+            visible.field.widget.attrs['id'] = visible.name
 
 class LoginForm(forms.Form):
     username = forms.CharField()

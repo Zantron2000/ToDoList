@@ -6,32 +6,34 @@
     <head>
         <link rel="stylesheet" href="{% static 'core/css/register.css' %}">
 
-        <title>Register</title>
+        <title>Sign Up</title>
     </head>
     <body>
+        <div class="logo">
+            <p>ToDo's List</p>
+        </div>
         <div class="box">
 
-            <div class="item title">
-                <h1>Register</h1>
+            <div class="title">
+                <h1>Sign Up</h1>
             </div>
-            <form action="" method="post">
-                <div class="flex">
-                    {% csrf_token %}
+            <div class="column">
+                <form action="" method="post">
+                    
+                        {% csrf_token %}
 
-                    {% for field in form %}
-                        <div class="item">
-                            <p class="description">{{ field.label }}</p>
-                            {{ field }}
-                        </div>
-                    {% endfor %}
-                    <div class="item">
-                        <input class="item submit" type="submit">
-                    </div>
-
-                </div>
-            </form>
-
-            <a href="{% url 'login' %}">Register</a>
+                        {% for field in form %}
+                            <div class="item">
+                                <label for="{{ field.name }}">{{ field.label }}</label>
+                                {{ field }}
+                            </div>
+                        {% endfor %}
+                        
+                        <input class="submit" type="submit" value="Sign Up">
+                </form>
+                <hr id="formbreak">
+                <p>Already signed up? <a href="{% url 'login' %}">Go to login</a></p>
+            </div>
         </div>
     </body>
 </html>
