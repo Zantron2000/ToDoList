@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-import random, datetime, pytz
+import random, datetime
 
 def generate_code():
     valid_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
