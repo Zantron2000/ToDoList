@@ -33,3 +33,10 @@ body {
     border: 1px lightgray solid;
     border-radius: 10px;
 }
+
+.logoimg {
+    width: 125px;
+    height: 125px;
+    border: 1px transparent solid;
+    border-radius: 50px;
+}

@@ -18,6 +18,7 @@ body {
     font-size: 19px;
     color: white;
     border-bottom: 2px #c53727 solid;
+    margin-top: 50px;
 }
 
 .logout:hover {
@@ -95,4 +96,12 @@ body {
     margin-top: 10px;
     color: #be1809;
     text-align: center;
+}
+
+.logoimg {
+    width: 125px;
+    height: 125px;
+    border: 1px transparent solid;
+    border-radius: 50px;
+    margin-left: 6vw;
 }

@@ -35,6 +35,7 @@ body {
         font-size: 19px;
         color: white;
         border-bottom: 2px #c53727 solid;
+        margin-top: 50px;
 }
 
 .logout:hover {
@@ -46,4 +47,12 @@ body {
     margin-right: 20px;
     text-align: center;
     line-height: 45px;
+}
+
+.logoimg {
+    width: 125px;
+    height: 125px;
+    border: 1px transparent solid;
+    border-radius: 50px;
+    margin-left: 6vw;
 }

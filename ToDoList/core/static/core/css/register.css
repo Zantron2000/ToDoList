@@ -9,7 +9,7 @@ body {
     color: white;
     padding: 5px 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .item label {
@@ -64,4 +64,11 @@ body {
     max-width: 470px;
     width: 53vw;
     margin-left: 0;
+}
+
+.logoimg {
+    width: 125px;
+    height: 125px;
+    border: 1px transparent solid;
+    border-radius: 50px;
 }

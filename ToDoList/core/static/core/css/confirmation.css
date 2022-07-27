@@ -9,7 +9,7 @@ body {
     color: white;
     padding: 5px 10px;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .box {
@@ -20,4 +20,11 @@ body {
     align-items: center;
     text-align: center;
     margin-top: 15vh;
+}
+
+.logoimg {
+    width: 125px;
+    height: 125px;
+    border: 1px transparent solid;
+    border-radius: 50px;
 }

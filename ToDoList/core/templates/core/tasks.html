@@ -10,11 +10,12 @@
     </head>
     <body>
         <div class="head">
+            <div></div>
             <div>
-                <p>CheckMark</p>
+                <img class='logoimg' src="{% static 'core/images/logo.JPG' %}">
             </div>
             <div class="right">
-                <form action="/logout" method="post">
+                <form action="/logout/" method="post">
                     {% csrf_token %}
                     <input class="logout" type="submit" value="Log Out">
                 </form>
@@ -26,7 +27,7 @@
 
             <hr>
 
-            <form action="/create" method="post">
+            <form action="/create/" method="post">
                 {% csrf_token %}
 
                 {% for field in form %}
