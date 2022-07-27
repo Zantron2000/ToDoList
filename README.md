@@ -8,4 +8,3 @@ settings.py, of which the current settings are hooked up to work with gmail only
 
 To Do's
 - Include logo
-- Forgot password button

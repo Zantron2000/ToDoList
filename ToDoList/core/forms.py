@@ -1,4 +1,4 @@
-from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.forms import UserCreationForm, PasswordResetForm, SetPasswordForm
 from django import forms
 from django.contrib.auth.models import User
 
@@ -33,10 +33,16 @@ class TaskForm(forms.ModelForm):
 class ValidationForm(forms.Form):
     code = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter code here...'}))
 
-class ResetRequestForm(forms.Form):
-    email = forms.EmailField()
-
+class UserPasswordResetForm(PasswordResetForm):
     def __init__(self, *args, **kwargs):
-        super(ResetRequestForm, self).__init__(*args, **kwargs)
+        super(UserPasswordResetForm, self).__init__(*args, **kwargs)
         for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'input'
+            visible.field.widget.attrs['id'] = visible.name
+
+class UserSetPasswordForm(SetPasswordForm):
+    def __init__(self, *args, **kwargs):
+        super(UserSetPasswordForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['class'] = 'input'
             visible.field.widget.attrs['id'] = visible.name

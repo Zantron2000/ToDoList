@@ -1,9 +1,10 @@
-from django.template.loader import render_to_string, get_template
+from django.template.loader import render_to_string
 from django.http import HttpRequest
-from django.core.mail import EmailMessage, EmailMultiAlternatives
+from django.core.mail import EmailMultiAlternatives
 from django.contrib.auth.models import Group
 from django.conf import settings
 from django.shortcuts import redirect
+from django.contrib.auth.models import User
 
 from core.models import UserValidation
 
@@ -23,6 +24,12 @@ def send_verify_email(request: HttpRequest, validation: UserValidation):
 def get_validation(user):
     try:
         return UserValidation.objects.get(user=user)
+    except:
+        return None
+
+def get_user(email):
+    try:
+        return UserValidation.objects.get(email__excact=email)
     except:
         return None
 

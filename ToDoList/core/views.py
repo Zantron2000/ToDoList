@@ -148,18 +148,3 @@ def resend_verification(request: HttpRequest):
             utils.send_email(request, validation)
 
     return redirect("verify")
-
-@utils.logout_required(redirect_url="tasks")
-def forgot_password(request: HttpRequest):
-    form = ResetRequestForm()
-    context = {"form": form}
-
-    if(request.method == "POST"):
-        form = ResetRequestForm(request.POST)
-
-        if(form.is_valid()):
-            pass
-        else:
-            utils.process_form_errors(form.errors.as_data(), context)
-
-    return render(request, "core/emailsent.html", context)
