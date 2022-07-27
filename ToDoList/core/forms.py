@@ -32,3 +32,11 @@ class TaskForm(forms.ModelForm):
 
 class ValidationForm(forms.Form):
     code = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter code here...'}))
+
+class ResetRequestForm(forms.Form):
+    email = forms.EmailField()
+
+    def __init__(self, *args, **kwargs):
+        super(ResetRequestForm, self).__init__(*args, **kwargs)
+        for visible in self.visible_fields():
+            visible.field.widget.attrs['id'] = visible.name

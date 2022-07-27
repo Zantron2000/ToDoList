@@ -2,6 +2,8 @@ from django.db import models
 from django.contrib.auth.models import User
 import random, datetime
 
+User._meta.get_field('email')._unique = True
+
 def generate_code():
     valid_characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz1234567890"
     code = ""

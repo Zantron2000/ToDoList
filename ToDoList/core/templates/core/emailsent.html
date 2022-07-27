@@ -1,0 +1,49 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'core/css/login.css' %}">
+
+        <title>Login</title>
+    </head>
+    <body>
+        <div class="head">
+            <p>CheckMark</p>
+        </div>
+
+        <div class="box">
+            <h1>Reset Request</h1>
+            
+            <form action="" method="post">
+                {% csrf_token %}
+
+                {% for field in form %}
+                    <div class="item">
+                        <label for="{{ field.name }}">{{ field.label }}</label>
+                        {{ field }}
+                    </div>
+                    {% if email and field.name == 'email' %}
+                        <ul>
+                            {% for error in username %}
+                                <li>{{error}}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
+                {% endfor %}
+                    
+                <input class="submit" type="submit" value="Request Password Reset">
+            </form>
+
+            <div class="messages" {% if not messages %}hidden{% endif %}>
+                {% if messages %}
+                    {% for message in messages %}
+                        <p class="message">{{message}}</p>
+                    {% endfor %}
+                {% endif %}
+            </div>
+
+        </div>
+    </body>
+</html>

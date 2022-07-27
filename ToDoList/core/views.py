@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib import messages
 
-from core.forms import NewUserForm, LoginForm, TaskForm, ValidationForm
+from core.forms import *
 from . import models
 from . import utils
 
@@ -33,7 +33,7 @@ def register_user(request: HttpRequest):
                 
                 return redirect("tasks")
         else:
-            placeholders = {"min_length": 9}
+            placeholders = {"min_length": 9, "model_name": "User", "field_label": "email"}
             utils.process_form_errors(form.errors.as_data(), context, placeholders)
 
     print(context)
@@ -127,7 +127,7 @@ def verify_user(request: HttpRequest):
             utils.process_form_errors(form.errors.as_data(), context, {})
 
     if(valid.sent == False):
-        sent = utils.send_email(request, valid)
+        sent = utils.send_verify_email(request, valid)
 
         if(sent == 1):
             valid.sent = True
@@ -149,6 +149,17 @@ def resend_verification(request: HttpRequest):
 
     return redirect("verify")
 
-def test(request: HttpRequest):
-    form = NewUserForm()
-    form.er
+@utils.logout_required(redirect_url="tasks")
+def forgot_password(request: HttpRequest):
+    form = ResetRequestForm()
+    context = {"form": form}
+
+    if(request.method == "POST"):
+        form = ResetRequestForm(request.POST)
+
+        if(form.is_valid()):
+            pass
+        else:
+            utils.process_form_errors(form.errors.as_data(), context)
+
+    return render(request, "core/emailsent.html", context)

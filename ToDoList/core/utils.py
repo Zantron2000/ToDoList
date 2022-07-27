@@ -1,14 +1,14 @@
 from django.template.loader import render_to_string, get_template
 from django.http import HttpRequest
 from django.core.mail import EmailMessage, EmailMultiAlternatives
-from django.contrib.auth.models import User, Group
+from django.contrib.auth.models import Group
 from django.conf import settings
 from django.shortcuts import redirect
 
 from core.models import UserValidation
 
 
-def send_email(request: HttpRequest, validation: UserValidation):
+def send_verify_email(request: HttpRequest, validation: UserValidation):
     subject = "Subject"
     message = "Hi there, " + request.user.username + "\nYour code is: " + validation.code
     email_from = settings.EMAIL_HOST_USER
@@ -26,7 +26,7 @@ def get_validation(user):
     except:
         return None
 
-def process_form_errors(errorsDict, contextDict, placeholders):
+def process_form_errors(errorsDict, contextDict, placeholders={}):
     for key in errorsDict.keys():
         issues = []
 

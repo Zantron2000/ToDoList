@@ -9,7 +9,7 @@ urlpatterns = [
     path("delete/<int:pk>", views.delete_task, name="delete"),
     path("logout", views.logout_user, name="logout"),
     path("verify", views.verify_user, name="verify"),
-    path("test", views.test, name="test"),
 
     path("resend", views.resend_verification, name="resend_verify"),
+    path("forgotpassword", views.forgot_password, name="forgot_password")
 ]
