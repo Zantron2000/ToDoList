@@ -128,4 +128,4 @@ def resend_verification(request: HttpRequest):
     return redirect("verify")
 
 def test(request: HttpRequest):
-    return HttpResponse("Done")
+    return render(request, "core/verifyemail.html", {"code": 111111})

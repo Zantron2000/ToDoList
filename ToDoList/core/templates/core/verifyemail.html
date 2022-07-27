@@ -1,0 +1,66 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="{% static 'core/css/verifyemail.css' %}">
+        <style>
+            body {
+                margin: 0;
+                padding: 0;
+                font-family: sans-serif;
+            }
+
+            .logo {
+                font-size: 24px;
+            }
+
+            .head {
+                background-color: #db4c3f;
+                color: white;
+                padding: 5px 10px;
+                display: flex;
+                justify-content: center;
+            }
+
+            .flex {
+                display: flex;
+                justify-content: center;
+            }
+
+            .content {
+                padding-top: 10vh;
+                text-align: center;
+            }
+
+            .code {
+                padding: 1vh 2vw;
+                background-color: lightgray;
+                font-size: 24px;
+                border: 1px lightgray solid;
+                border-radius: 10px;
+            }
+        </style>
+        <title>Verify Email</title>
+    </head>
+    
+    <body>
+        <div class="head">
+            <div class="logo">
+                <p>CheckMark</p>
+            </div>
+        </div>
+
+        <div class="flex">
+            <div class="content">
+                <h1>Verify Email</h1>
+                <p>The code is valid for the next 30 minutes</p>
+
+                <div class="code">
+                    <p>{{code}}</p>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

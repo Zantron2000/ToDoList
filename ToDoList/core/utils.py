@@ -1,6 +1,6 @@
-from urllib import request
+from django.template.loader import render_to_string, get_template
 from django.http import HttpRequest
-from django.core.mail import EmailMessage
+from django.core.mail import EmailMessage, EmailMultiAlternatives
 from django.contrib.auth.models import User, Group
 from django.conf import settings
 from django.shortcuts import redirect
@@ -13,8 +13,12 @@ def send_email(request: HttpRequest, validation: UserValidation):
     message = "Hi there, " + request.user.username + "\nYour code is: " + validation.code
     email_from = settings.EMAIL_HOST_USER
     recipent_list = [request.user.email]
+    template1 = get_template("core/verifyemail.html")
+    template2 = template1.render({"code": validation.code})
+    template = render_to_string("core/verifyemail.html", {"code": validation.code})
 
-    email = EmailMessage(subject=subject, body=message, from_email=email_from, to=recipent_list)
+    email = EmailMultiAlternatives(subject=subject, body=message, from_email=email_from, to=recipent_list)
+    email.attach_alternative(template, "text/html")
 
     return email.send()
 
