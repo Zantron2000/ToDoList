@@ -47,8 +47,16 @@
                         
                         <input class="submit" type="submit" value="Log in">
                 </form>
-                <hr id="formbreak">
-                <p>Don't have an account? <a href="{% url 'register' %}">Sign up</a></p>
+
+                <div class="messages" {% if not messages %}hidden{% endif %}>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="message">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+                    <hr id="formbreak">
+                    <p>Don't have an account? <a href="{% url 'register' %}">Sign up</a></p>
             </div>
         </div>
     </body>

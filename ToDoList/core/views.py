@@ -1,10 +1,9 @@
-from multiprocessing import context
-from urllib import request
 from django.shortcuts import redirect, render
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.contrib import messages
 
 from core.forms import NewUserForm, LoginForm, TaskForm
 from . import models
@@ -54,6 +53,8 @@ def login_user(request):
                 login(request, user)
 
                 return redirect("tasks")
+            else:
+                messages.error(request, "User not found")
         else:
             print(form.errors.as_data())
             utils.process_form_errors(form.errors.as_data(), context, {})
@@ -115,6 +116,8 @@ def verify_user(request: HttpRequest):
             valid.delete()
 
             return redirect("tasks")
+        else:
+            messages.error(request, "The codes don't match")
 
     if(valid.sent == False):
         sent = utils.send_email(request, valid)

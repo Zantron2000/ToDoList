@@ -8,5 +8,5 @@ settings.py, of which the current settings are hooked up to work with gmail only
 
 To Do's
 - Add fail safes to view & util methods
-- Add error messages to login, register and validate email
 - Include logo
+- Forgot password button

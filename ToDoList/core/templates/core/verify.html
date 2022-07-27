@@ -31,17 +31,27 @@
                     {% csrf_token %}
                     
                     <div class="item">
-                        <input type="text" name="code" placeholder="Enter code here...">
+                        <input type="text" name="code" required placeholder="Enter code here...">
                     </div>
 
                     <input class="submit" type="submit">
                 </form>
+
+                <div class="messages" {% if not messages %}hidden{% endif %}>
+                    {% if messages %}
+                        {% for message in messages %}
+                            <p class="message">{{message}}</p>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+
                 <hr>
                 <form method="post" action="/resend">
                     <p class="info">Didn't recieve it? </p>
                     {% csrf_token %}
                     <input class="repeat" type="submit" value="Send again">
                 </form>
+
             </div>
         </div>
     </body>

@@ -90,3 +90,9 @@ body {
 .repeat:hover {
     color: #db4c3f
 }
+
+.messages {
+    margin-top: 10px;
+    color: #be1809;
+    text-align: center;
+}
