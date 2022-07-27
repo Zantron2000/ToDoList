@@ -1,25 +1,48 @@
+{% load static %}
+
 <!DOCTYPE html>
 
 <html>
     <head>
+        <link rel="stylesheet" href="{% static 'core/css/verify.css' %}">
+
         <title>Verify Email</title>
     </head>
     
     <body>
-        <h1>Verify Email</h1>
-        <p>The code is valid for the next 30 minutes</p>
+        <div class="head">
+            <div>
+                <p>CheckMark</p>
+            </div>
+            <div class="right">
+                <form action="/logout" method="post">
+                    {% csrf_token %}
+                    <input class="logout" type="submit" value="Log Out">
+                </form>
+            </div>
+        </div>
 
-        <form method="post" action="">
-            {% csrf_token %}
+        <div class="flex">
+            <div class="content">
+                <h1>Verify Email</h1>
+                <p>The code is valid for the next 30 minutes</p>
 
-            <input type="text" name="code">
+                <form method="post" action="">
+                    {% csrf_token %}
+                    
+                    <div class="item">
+                        <input type="text" name="code" placeholder="Enter code here...">
+                    </div>
 
-            <input type="submit">
-        </form>
-
-        <form method="post" action="/resend">
-            {% csrf_token %}
-            <input type="submit">
-        </form>
+                    <input class="submit" type="submit">
+                </form>
+                <hr>
+                <form method="post" action="/resend">
+                    <p class="info">Didn't recieve it? </p>
+                    {% csrf_token %}
+                    <input class="repeat" type="submit" value="Send again">
+                </form>
+            </div>
+        </div>
     </body>
 </html>
