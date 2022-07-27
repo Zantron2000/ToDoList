@@ -5,6 +5,7 @@ from . import views
 from core.forms import UserPasswordResetForm, UserSetPasswordForm
 
 urlpatterns = [
+    path("", views.register_user),
     path("register/", views.register_user, name="register"),
     path("login/", views.login_user, name="login"),
     path("tasklist/", views.get_tasks, name="tasks"),
