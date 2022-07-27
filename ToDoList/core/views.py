@@ -38,10 +38,11 @@ def login_user(request):
     form = LoginForm()
 
     if request.method == "POST":
-        form = LoginForm(request.POST)
+        print(request.POST)
+        form:LoginForm = LoginForm(request.POST)
 
         if(form.is_valid()):
-            user = authenticate(username=form.username, password=form.password)
+            user = authenticate(username=form.cleaned_data['username'], password=form.cleaned_data['password'])
             if(user is not None):
                 login(request, user)
 

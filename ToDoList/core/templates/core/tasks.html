@@ -1,44 +1,56 @@
+{% load static %}
+
 <!DOCTYPE html>
 
 <html>
     <head>
+        <link rel="stylesheet" href="{% static 'core/css/tasks.css' %}">
+
         <title>TaskList</title>
     </head>
     <body>
-        <h1>TaskList</h1>
-        <form action="/logout" method="post">
-            {% csrf_token %}
-            <input type="submit" value="Log Out">
-        </form>
+        <div class="head">
+            <div>
+                <p>CheckMark</p>
+            </div>
+            <div class="right">
+                <form action="/logout" method="post">
+                    {% csrf_token %}
+                    <input class="logout" type="submit" value="Log Out">
+                </form>
+            </div>
+        </div>
+        <div class="content">
+            <h1>TaskList</h1>
+            
 
-        <hr>
+            <hr>
 
-        <form action="/create" method="post">
-            {% csrf_token %}
+            <form action="/create" method="post">
+                {% csrf_token %}
 
-            {% for field in form %}
-        
-            {{ field.label }}
-            {{ field }}
+                {% for field in form %}
+            
+                Create Task: 
+                {{ field }}
 
+                {% endfor %}
+
+                <input type="submit" value="Create">
+            </form>
+            
+            <hr>
+            {% for task in tasklist %}
+            
+            <form style="display:inline" action="{% url 'delete' task.id %}" method="post">
+                {% csrf_token %}
+                <input class="delete" type="submit" value="X">
+            </form>
+
+            <p class="task">- {{ task }}</p>
+
+            <hr>
             {% endfor %}
-            
-            
-
-            <input type="submit"></input>
-        </form>
-        
-        <hr>
-        {% for task in tasklist %}
-        
-        {{ task }}
-
-        <form style="display:inline" action="{% url 'delete' task.id %}" method="post">
-            {% csrf_token %}
-            <input type="submit" value="delete">
-        </form>
-        <hr>
-        {% endfor %}
-
+        </div>
     </body>
 </html>

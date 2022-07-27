@@ -1,0 +1,48 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.head {
+    background-color: #db4c3f;
+    color: white;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.content {
+    margin-left: 20px;
+}
+
+.delete {
+    border: none;
+    background-color: white;
+}
+
+.delete:hover {
+    color: red;
+}
+
+.task {
+    display: inline;
+}
+
+.logout {
+        border: none;
+        background-color: transparent;
+        font-size: 19px;
+        color: white;
+        border-bottom: 2px #c53727 solid;
+}
+
+.logout:hover {
+    border-bottom: 2px #aa2f22 solid;
+    cursor: pointer;
+}
+
+.right {
+    margin-right: 20px;
+    text-align: center;
+    line-height: 45px;
+}
