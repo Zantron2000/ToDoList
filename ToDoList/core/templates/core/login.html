@@ -9,7 +9,7 @@
         <title>Login</title>
     </head>
     <body>
-        <div class="logo">
+        <div class="head">
             <p>CheckMark</p>
         </div>
 
@@ -28,6 +28,21 @@
                                 <label for="{{ field.name }}">{{ field.label }}</label>
                                 {{ field }}
                             </div>
+
+                            {% if username and field.name == 'username' %}
+                                <ul>
+                                    {% for error in username %}
+                                        <li>{{error}}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% elif password and field.name == 'password' %}
+                                <ul>
+                                    {% for error in password %}
+                                        <li>{{error}}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
+
                         {% endfor %}
                         
                         <input class="submit" type="submit" value="Log in">

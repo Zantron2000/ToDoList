@@ -1,3 +1,4 @@
+from multiprocessing import context
 from urllib import request
 from django.shortcuts import redirect, render
 from django.http import HttpRequest, HttpResponse
@@ -15,6 +16,8 @@ from . import utils
 def register_user(request: HttpRequest):
     form = NewUserForm()
 
+    context = {"form": form}
+
     if request.method == "POST":
         form = NewUserForm(request.POST)
 
@@ -30,15 +33,19 @@ def register_user(request: HttpRequest):
                 login(request, user)
                 
                 return redirect("tasks")
+        else:
+            placeholders = {"min_length": 9}
+            utils.process_form_errors(form.errors.as_data(), context, placeholders)
 
-    return render(request, "core/register.html", {"form": form})
+    print(context)
+    return render(request, "core/register.html", context)
 
 @utils.logout_required(redirect_url="tasks")
 def login_user(request):
     form = LoginForm()
+    context = {"form": form}
 
     if request.method == "POST":
-        print(request.POST)
         form:LoginForm = LoginForm(request.POST)
 
         if(form.is_valid()):
@@ -47,8 +54,11 @@ def login_user(request):
                 login(request, user)
 
                 return redirect("tasks")
+        else:
+            print(form.errors.as_data())
+            utils.process_form_errors(form.errors.as_data(), context, {})
 
-    return render(request, "core/login.html", {"form": form})
+    return render(request, "core/login.html", context)
 
 @login_required(login_url="login")
 @utils.group_required(group_name="Verified", redirect_url="verify")
@@ -128,4 +138,5 @@ def resend_verification(request: HttpRequest):
     return redirect("verify")
 
 def test(request: HttpRequest):
-    return render(request, "core/verifyemail.html", {"code": 111111})
+    form = NewUserForm()
+    form.er

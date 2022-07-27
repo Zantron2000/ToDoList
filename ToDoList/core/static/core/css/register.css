@@ -1,11 +1,15 @@
 body {
     font-family: sans-serif;
+    margin: 0;
+    padding: 0;
 }
 
-.logo {
-    color:#db4c3f;
-    font-size: 24px;
-    font-weight: bold;
+.head {
+    background-color: #db4c3f;
+    color: white;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .item label {

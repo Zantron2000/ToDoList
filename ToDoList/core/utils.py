@@ -13,8 +13,6 @@ def send_email(request: HttpRequest, validation: UserValidation):
     message = "Hi there, " + request.user.username + "\nYour code is: " + validation.code
     email_from = settings.EMAIL_HOST_USER
     recipent_list = [request.user.email]
-    template1 = get_template("core/verifyemail.html")
-    template2 = template1.render({"code": validation.code})
     template = render_to_string("core/verifyemail.html", {"code": validation.code})
 
     email = EmailMultiAlternatives(subject=subject, body=message, from_email=email_from, to=recipent_list)
@@ -27,6 +25,19 @@ def get_validation(user):
         return UserValidation.objects.get(user=user)
     except:
         return None
+
+def process_form_errors(errorsDict, contextDict, placeholders):
+    for key in errorsDict.keys():
+        issues = []
+
+        for problem in errorsDict[key]:
+            if('%' in problem.message):
+                print(problem.message)
+                issues.append(problem.message % placeholders)
+            else:
+                issues.append(problem.message)
+
+        contextDict[key] = issues
 
 def group_required(group_name, redirect_url):
     def inner_function(func):

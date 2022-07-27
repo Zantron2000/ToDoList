@@ -9,7 +9,7 @@
         <title>Sign Up</title>
     </head>
     <body>
-        <div class="logo">
+        <div class="head">
             <p>CheckMark</p>
         </div>
         
@@ -28,6 +28,32 @@
                                 <label for="{{ field.name }}">{{ field.label }}</label>
                                 {{ field }}
                             </div>
+
+                            {% if email and field.name == 'email' %}
+                                <ul>
+                                    {% for error in email %}
+                                        <li>{{error}}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% elif username and field.name == 'username' %}
+                                <ul>
+                                    {% for error in username %}
+                                        <li>{{error}}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% elif password2 and field.name == 'password2' %}
+                                <ul>
+                                    {% for error in password2 %}
+                                        <li>{{error}}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% elif password1 and field.name == 'password1' %}
+                                <ul>
+                                    {% for error in password1 %}
+                                        <li>{{error}}</li>
+                                    {% endfor %}
+                                </ul>
+                            {% endif %}
                         {% endfor %}
                         
                         <input class="submit" type="submit" value="Sign Up">
