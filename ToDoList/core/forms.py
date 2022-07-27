@@ -29,3 +29,6 @@ class TaskForm(forms.ModelForm):
     class Meta:
         model = Task
         fields = ["task"]
+
+class ValidationForm(forms.Form):
+    code = forms.CharField(widget=forms.TextInput(attrs={'placeholder':'Enter code here...'}))

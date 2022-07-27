@@ -30,9 +30,19 @@
                 <form method="post" action="">
                     {% csrf_token %}
                     
-                    <div class="item">
-                        <input type="text" name="code" required placeholder="Enter code here...">
-                    </div>
+                    {% for field in form %}
+                        <div class="item">
+                            {{ field }}
+                        </div>
+                        
+                        {% if code and field.name == 'code' %}
+                            <ul>
+                                {% for error in code %}
+                                    <li>{{error}}</li>
+                                {% endfor %}
+                            </ul>
+                        {% endif %}
+                    {% endfor %}
 
                     <input class="submit" type="submit">
                 </form>

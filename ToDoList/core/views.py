@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
 from django.contrib import messages
 
-from core.forms import NewUserForm, LoginForm, TaskForm
+from core.forms import NewUserForm, LoginForm, TaskForm, ValidationForm
 from . import models
 from . import utils
 
@@ -108,16 +108,23 @@ def verify_user(request: HttpRequest):
         valid.save()
     elif(valid.expired(30)):
         valid.generate_new_code()
-        
-    if(request.method == "POST"):
-        if(request.POST["code"] == valid.code):
-            group:Group = Group.objects.get(name="Verified")
-            group.user_set.add(request.user)
-            valid.delete()
+    
+    form = ValidationForm()
+    context = {"form": form}
 
-            return redirect("tasks")
+    if(request.method == "POST"):
+        form = ValidationForm(request.POST)
+        if(form.is_valid()):
+            if(request.POST["code"] == valid.code):
+                group:Group = Group.objects.get(name="Verified")
+                group.user_set.add(request.user)
+                valid.delete()
+
+                return redirect("tasks")
+            else:
+                messages.error(request, "The codes don't match")
         else:
-            messages.error(request, "The codes don't match")
+            utils.process_form_errors(form.errors.as_data(), context, {})
 
     if(valid.sent == False):
         sent = utils.send_email(request, valid)
@@ -125,8 +132,10 @@ def verify_user(request: HttpRequest):
         if(sent == 1):
             valid.sent = True
             valid.save()
+        else:
+            messages.error(request, "Can't send to given email")
 
-    return render(request, "core/verify.html")
+    return render(request, "core/verify.html", context)
 
 @login_required(login_url="login")
 @utils.group_unrequired(group_name="Verified", redirect_url="tasks")
