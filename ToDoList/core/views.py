@@ -140,11 +140,10 @@ def verify_user(request: HttpRequest):
 @login_required(login_url="login")
 @utils.group_unrequired(group_name="Verified", redirect_url="tasks")
 def resend_verification(request: HttpRequest):
-    print("hello")
     if(request.method == "POST"):
         validation: models.UserValidation = utils.get_validation(request.user)
         if(validation is not None and validation.expired(1)):
             validation.generate_new_code()
-            utils.send_email(request, validation)
+            utils.send_verify_email(request, validation)
 
     return redirect("verify")
